@@ -69,9 +69,11 @@ namespace tsl {
               return Fun<simd<BaseT, scalar>, Args...>::apply(args...);
             } 
             {% for avail_extension_type_size in avail_extension_types_dict %}
+              {% if avail_extension_type_size != 0 %}
             else if constexpr(sizeof(BaseT)*CHAR_BIT*VectorLength == {{ avail_extension_type_size }}) {
               return Fun<simd<BaseT, {{ avail_extension_types_dict[avail_extension_type_size] }}>, Args...>::apply(args...);
             }
+              {% endif %}
             {% endfor %}
             else {
               std::cerr << "ERROR: unsupported vector length" << std::endl;
@@ -90,6 +92,12 @@ namespace tsl {
 
         void wait() { }
     };
+    {% for key, extension in avail_extension_types_dict.items() %}
+    template<>
+    struct executor_helper_t<{{ extension }}> {
+      using type = cpu;
+    };
+    {% endfor %}
   }
 }
 #endif

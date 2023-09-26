@@ -33,10 +33,7 @@ implementations:
               target.copy(out, in, element_count);
             }
         public:
-          template<VectorProcessingStyle PS, template<typename...> class Fun, typename... Args>
             decltype(auto) submit(Args... args) {
-              return target.template submit<PS, Fun>(args...);
-            }
           template<template<typename...> class Fun, typename... Args>
             decltype(auto) submit(Args... args) {
               return target.template submit<Fun>(args...);
@@ -71,4 +68,14 @@ implementations:
             target.wait();
           }
       };
+  - |
+    namespace runtime {      
+      template<typename Extension>
+      struct executor_helper_t;
+    }
+  - |
+    template<typename Extension, typename... Args>
+    static inline auto get_executor_by_extension(Args&&... args) {
+      return executor<typename runtime::executor_helper_t<Extension>::type>{std::forward<Args>(args)...};
+    }
 ...

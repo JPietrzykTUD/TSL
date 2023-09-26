@@ -150,6 +150,9 @@ namespace tsl {
     
     template<typename Selector>
     class oneAPI_fpga {
+      public:
+        static constexpr bool needs_heterogenious_memory_access = false;
+        static constexpr bool has_heterogenious_memory_access = true;
       private:
         Selector selector;
         sycl::queue& q;
@@ -334,6 +337,13 @@ namespace tsl {
     #else
     using oneAPI_default_fpga = oneAPI_fpga<oneAPI_emulator_selector>;
     #endif
+  
+    {% for key, extension in avail_extension_types_dict.items() %}
+    template<>
+    struct executor_helper_t<{{ extension }}> {
+      using type = oneAPI_fpga;
+    };
+    {% endfor %}
   }
 }
 
