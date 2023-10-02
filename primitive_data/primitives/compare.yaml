@@ -15,7 +15,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*]==vec_b[*]."
-testing: #optional
+testing_old: #optional
   - test_name: "all_equal"
     requires: ["to_integral", "loadu"]
     includes: ["<cstddef>"]
@@ -177,7 +177,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*]==vec_b[*]."
-testing: #optional
+testing_old: #optional
   - test_name: "all_equal"
     requires: ["to_integral", "loadu"]
     includes: ["<cstddef>"]
@@ -257,7 +257,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*]!=vec_b[*]."
-testing:
+testing_old:
   - test_name: "all_equal"
     requires: ["to_integral", "loadu"]
     includes: ["<cstddef>"]
@@ -424,7 +424,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether the data is in the given range."
-testing:
+testing_old:
   - test_name: "complete_range"
     requires: ["to_integral", "loadu", "set1"]
     includes: ["<cstddef>"]
@@ -587,7 +587,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*] < vec_b[*]."
-testing: #optional
+testing_old: #optional
   - requires: ["to_integral", "loadu"]
     includes: ["<cstddef>", "<limits>"]
     implementation: |
@@ -732,7 +732,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*] < vec_b[*]."
-testing: #optional
+testing_old: #optional
   - requires: ["to_integral", "loadu"]
     includes: ["<cstddef>", "<limits>"]
     implementation: |
@@ -874,7 +874,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*] < vec_b[*]."
-testing: #optional
+testing_old: #optional
   - requires: ["to_integral", "loadu"]
     includes: ["<cstddef>", "<limits>"]
     implementation: |
@@ -1027,7 +1027,7 @@ parameters:
 returns:
   ctype: "typename Vec::mask_type"
   description: "Vector mask type indicating whether vec_a[*] < vec_b[*]."
-testing: #optional
+testing_old: #optional
   - requires: ["to_integral", "loadu"]
     includes: ["<cstddef>", "<limits>"]
     implementation: |
@@ -1178,7 +1178,7 @@ parameters:
 returns:
   ctype: "bool"
   description: "Result indicating if the vector register contains at least one value unequal to zero."
-testing:
+testing_old:
   - test_name: "with_only_zero"
     requires: ["set_zero"]
     includes: ["<cstddef>"]
@@ -1270,7 +1270,7 @@ parameters:
 returns:
   ctype: "typename Vec::base_type"
   description: "Result of the count"
-testing:
+testing_old:
   - test_name: "with_only_zero_searching_zero"
     requires: ["set1"]
     includes: [ ]
