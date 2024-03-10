@@ -198,6 +198,23 @@ namespace tsl {
             using T = std::remove_pointer_t<std::remove_reference_t<_T>>;
             T * buffer;
             if (alignment == 0) {
+              if ((buffer = sycl::malloc_host<T>(element_count*sizeof(T), q)) == nullptr) {
+                std::cerr << "ERROR: could not allocate space on host" << std::endl;
+                std::terminate();
+              }
+            } else {
+              if ((buffer = sycl::aligned_alloc_host<T>(alignment, element_count*sizeof(T), q)) == nullptr) {
+                std::cerr << "ERROR: could not allocate space on host" << std::endl;
+                std::terminate();
+              }
+            }
+            return sycl::host_ptr<T>{buffer};
+          }
+        template<typename _T>
+          auto allocate(size_t element_count, ::tsl::MEMORY_ON_DEVICE, size_t alignment = 0) {
+            using T = std::remove_pointer_t<std::remove_reference_t<_T>>;
+            T * buffer;
+            if (alignment == 0) {
               if ((buffer = sycl::malloc_device<T>(element_count*sizeof(T), q)) == nullptr) {
                 std::cerr << "ERROR: could not allocate space on host" << std::endl;
                 std::terminate();
