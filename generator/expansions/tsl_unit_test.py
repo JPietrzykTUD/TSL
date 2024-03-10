@@ -6,7 +6,7 @@ import logging
 from pathlib import Path
 from typing import List, Set, Generator, Dict, Tuple
 
-import networkx as nx
+# import networkx as nx
 
 from generator.core.ctrl.tsl_lib import TSLLib
 
@@ -493,9 +493,8 @@ class TSLTestGenerator:
         if not config.expansion_enabled("unit_tests"):
             return
 
-        dep_graph.inspect_tests()
-        
-        print(dep_graph.as_str(True))
+        # dep_graph.inspect_tests()
+        # print(dep_graph.as_str(True))
 
         unit_test_config: dict = config.get_expansion_config("unit_tests")
 

@@ -202,6 +202,7 @@ class TSLGenerator:
         print("DONE WITH ANAYLSIS")
         #uncomment the next line to start jaal server
         #dep_graph.to_jaal()
+        dep_graph.to_jaal(dep_graph.tests_subgraph())
 
         file_generator: TSLFileGenerator = TSLFileGenerator(lib, dep_graph)
         if not config.print_output_only:

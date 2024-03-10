@@ -973,6 +973,7 @@ class TSLDependencyGraph:
     # compile regex
     primitive_pattern = re.compile(tsl_primitive_regex)
     print(f"Primitive Pattern: {primitive_pattern.pattern}")
+    print("-------------------")
 
     # Step 4: Add all possible primitive instantiations to the dependency graph and connect them with their associated primitive
     if level_of_detail.value >= TSLInspectionLevelOfDetail.PRIMITIVE_INSTANTIATION.value:
@@ -1026,6 +1027,9 @@ class TSLDependencyGraph:
       raise ValueError("Cyclic class-dependencies detected.")
     for class_node in ordered_nodes_generator:
       yield class_node.class_name
+
+  def tests_subgraph(self) -> nx.DiGraph:
+    return self.subgraph(TSLDependencyGraphLevelOfDetail.TEST_IMPLEMENTATION)
 
 #   def as_str(self, include_tests: bool = False) -> str:
 #     class_count = sum(1 for _ in self.nodes_by_type([TSLDependencyGraph.PrimitiveClassNode]))
